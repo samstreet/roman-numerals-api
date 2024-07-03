@@ -17,19 +17,24 @@ Running the application is simple:
 
 - `cp .env.example .env`
 - Add the following items to the newly made .env
-    - DB_USERNAME=default
-    - DB_PASSWORD=secret  
+    - DB_USERNAME=root
+    - DB_PASSWORD=secret
+    - DB_HOST=host.docker.internal
+    - DB_PORT=3306
+    - DB_DATABASE=default  
 - `cd .docker`
 - `docker-compose up -d`
 - You can either now use Docker Desktop to execute commands or find the relevant docker container id to run commands
     - For Docker Desktop
         - To install the composer packages, open Docker Desktop, select the PHP container, navigate to exec and run `composer install`
-        - generate a new APP_KEY inside the exec tab `php artisan key:generate`
+        - Generate a new APP_KEY inside the exec tab `php artisan key:generate`
+        - Run the migrations in the exec tab `php artisan migrate`
     - For a CLI approach
         - Open a terminal
         - run `docker ps` and find the PHP container or alternatively use `docker ps -aqf "name=docker-php"` on a mac you can also do `pbcopy < docker ps -aqf "name=docker-php`
         - Using the id of the container run the following command `docker exec {YOUR CONTAINER ID} composer install`
         - Using the above approach generate a new APP_KEY `docker exec {YOUR CONTAINER ID} php artisan key:generate`
+        - Using the above approach run the migrations `docker exec {YOUR CONTAINER ID} php artisan migrate`
 - Navigate to `http://localhost/` to see the application
 
 ## Calling the endpoints
