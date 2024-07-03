@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Services\IntegerConverterInterface;
+use App\Storage\Entity\Conversion;
+use DateTime;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,11 +14,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $min = 1;
+        $max = 3999;
+        for($i = 1; $i <= 1000; $i++) {
+            $value = rand($min, $max);
+            (new Conversion([
+                'integer' => $value,
+                'numeral' => app(IntegerConverterInterface::class)->convertInteger($value),
+                'converted_at' => $this->randomDateInRange(now()->subDays(rand(1, 50)), now()),
+            ]))->save();
+        }
+    }
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+    private function randomDateInRange(DateTime $start, DateTime $end): DateTime
+    {
+        $randomTimestamp = mt_rand($start->getTimestamp(), $end->getTimestamp());
+        $randomDate = new DateTime();
+        $randomDate->setTimestamp($randomTimestamp);
+        return $randomDate;
     }
 }

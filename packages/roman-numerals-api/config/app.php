@@ -165,14 +165,14 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        App\Providers\Routes\v1\ConvertIntegerToNumeralRouteServiceProvider::class
+        App\Providers\ConversionsServiceProvider::class,
+        App\Providers\Routes\v1\ConvertIntegerToNumeralRouteServiceProvider::class,
+        App\Providers\Routes\v1\StatisticsMosPopularConversionServiceProvider::class,
+        App\Providers\Routes\v1\StatisticsMostRecentConversionServiceProvider::class,
     ])->toArray(),
 
-    'aliases' => Facade::defaultAliases()->merge([
-        // 'ExampleClass' => App\Example\ExampleClass::class,
-    ])->toArray(),
+    'aliases' => Facade::defaultAliases()->merge([])->toArray(),
 ];
