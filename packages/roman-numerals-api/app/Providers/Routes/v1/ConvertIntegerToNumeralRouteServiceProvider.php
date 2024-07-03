@@ -10,7 +10,9 @@ class ConvertIntegerToNumeralRouteServiceProvider extends RouteServiceProvider
 {
     protected array $attributes = [
         'prefix' => '/v1/convert-integer-to-numeral',
-        'middleware' => [],
+        'middleware' => [
+            'cache.use.integer-converted'
+        ],
     ];
 
     protected array $allowedMethods = [

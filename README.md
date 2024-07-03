@@ -6,7 +6,7 @@ The repo is split up into the following diretories:
 
 - .docs: a directory for any relevant documentation.
 
--  .docker: this houses all of the docker contextual files for the running of the application(s). This could house future docker specific things for deployments.
+- .docker: this houses all the docker contextual files for the running of the application(s). This could house future docker specific things for deployments.
 
 - .vscode: this directory is optional and wouldn't normally be committed but I like the consistency of some settings that I have found in VS Code, usually a keen PHPStorm user.
 
@@ -29,16 +29,28 @@ Running the application is simple:
         - To install the composer packages, open Docker Desktop, select the PHP container, navigate to exec and run `composer install`
         - Generate a new APP_KEY inside the exec tab `php artisan key:generate`
         - Run the migrations in the exec tab `php artisan migrate`
+        - Run the seeder in the exec tab `php artisan db:seed`
     - For a CLI approach
         - Open a terminal
         - run `docker ps` and find the PHP container or alternatively use `docker ps -aqf "name=docker-php"` on a mac you can also do `pbcopy < docker ps -aqf "name=docker-php`
         - Using the id of the container run the following command `docker exec {YOUR CONTAINER ID} composer install`
         - Using the above approach generate a new APP_KEY `docker exec {YOUR CONTAINER ID} php artisan key:generate`
         - Using the above approach run the migrations `docker exec {YOUR CONTAINER ID} php artisan migrate`
+        - Using the above approach run the seeder `docker exec {YOUR CONTAINER ID} php artisan db:seed`
 - Navigate to `http://localhost/` to see the application
 
 ## Calling the endpoints
+Utilise Postman/Paw/other to call the endpoints.
+
+### Convert an integer to a numeral
+
+### Get the most recent conversions
+
+### Get the most popular conversions
 
 ## Running tests
 
 ## Future considerations
+- Auth would be added via a JWT implementation or the use of Passport
+- Would have used Redis for caching but seemed out of scope so stuck with file cache
+- Could have optimised the database queries and used indexes, seemed out of scope for this test

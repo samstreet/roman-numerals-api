@@ -2,18 +2,18 @@
 
 namespace Tests\Unit;
 
-use App\Services\RomanNumeralConverter;
-use PHPUnit\Framework\TestCase;
+use App\Services\IntegerConverterInterface;
+use Tests\TestCase;
 
 class RomanNumeralTest extends TestCase
 {
-    private RomanNumeralConverter $converter;
+    private IntegerConverterInterface $converter;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->converter = new RomanNumeralConverter();
+        $this->converter = app(IntegerConverterInterface::class);
     }
 
     public function testConvertsIntegersToRomanNumerals(): void
