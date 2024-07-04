@@ -11,7 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 class ConvertIntegerToNumeralController extends BaseController
 {
     public function __construct(private readonly RomanNumeralConverter $romanNumeralConverter)
-    {}
+    {
+    }
 
     public function post(ConvertIntegerToNumeralRequest $request): JsonResponse
     {
