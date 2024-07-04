@@ -8,7 +8,8 @@ use Exception;
 final class RomanNumeralConverter implements IntegerConverterInterface
 {
     public function __construct(private readonly ConversionsRepositoryInterface $conversionsRepository)
-    {}
+    {
+    }
 
     private array $numberMap = [
         1000 => 'M',

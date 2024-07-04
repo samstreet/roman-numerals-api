@@ -5,17 +5,21 @@ namespace App\Bridge\DTO;
 class ConversionDTO extends ImmutableDTO implements \JsonSerializable
 {
     public function __construct(private readonly int $integer, private readonly string $numeral, private readonly ?\DateTime $convertedAt)
-    {}
+    {
+    }
 
-    public function getInteger(): int {
+    public function getInteger(): int
+    {
         return $this->integer;
     }
 
-    public function getNumeral(): string {
+    public function getNumeral(): string
+    {
         return $this->numeral;
     }
 
-    public function getConvertedAt(): \DateTime|null {
+    public function getConvertedAt(): \DateTime|null
+    {
         return $this->convertedAt;
     }
 

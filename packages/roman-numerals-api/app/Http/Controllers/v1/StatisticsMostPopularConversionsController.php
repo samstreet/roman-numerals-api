@@ -9,7 +9,8 @@ use Illuminate\Http\JsonResponse;
 class StatisticsMostPopularConversionsController extends BaseController
 {
     public function __construct(private readonly StatisticsInterface $statistics)
-    {}
+    {
+    }
 
     public function get(): JsonResponse
     {

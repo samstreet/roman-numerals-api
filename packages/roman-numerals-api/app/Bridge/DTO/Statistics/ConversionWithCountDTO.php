@@ -5,7 +5,8 @@ namespace App\Bridge\DTO\Statistics;
 final readonly class ConversionWithCountDTO implements \JsonSerializable
 {
     public function __construct(private string $numeral, private int $count)
-    {}
+    {
+    }
 
     public function getCount(): int
     {
