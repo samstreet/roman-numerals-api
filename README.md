@@ -5,12 +5,10 @@ This is an example repository of a roman numerals API
 The repo is split up into the following diretories:
 
 - .docs: a directory for any relevant documentation.
-
 - .docker: this houses all the docker contextual files for the running of the application(s). This could house future docker specific things for deployments.
-
-- .vscode: this directory is optional and wouldn't normally be committed but I like the consistency of some settings that I have found in VS Code, usually a keen PHPStorm user.
-
-- packages: this houses the actual application, included in this test is a `roman-numerals-api` and `roman-numerals-frontend`
+- .vscode: this directory is optional and wouldn't normally be committed, but I like the consistency of some settings that I have found in VS Code, usually a keen PHPStorm user.
+- packages: this houses the actual application, included in this test is a `roman-numerals-api`, `roman-numerals-frontend`, `roman-numerals-api-docs` and `roman-numerals-other-service`
+- .github: the location of any workflow specific things for GH actions
 
 ## Running The application
 Running the application is simple:
@@ -43,14 +41,80 @@ Running the application is simple:
 Utilise Postman/Paw/other to call the endpoints.
 
 ### Convert an integer to a numeral
+Open up Postman/Paw/Other and import the following as a new request:
+```bash
+curl --location 'http://localhost/v1/convert-integer-to-numeral' \
+--header 'Accept: application/json, text/plain, */*' \
+--header 'Accept-Language: en-GB,en-US;q=0.9,en;q=0.8' \
+--header 'Connection: keep-alive' \
+--header 'Content-Type: application/json' \
+--header 'Origin: http://localhost:8000' \
+--header 'Referer: http://localhost:8000/' \
+--header 'Sec-Fetch-Dest: empty' \
+--header 'Sec-Fetch-Mode: cors' \
+--header 'Sec-Fetch-Site: same-site' \
+--header 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36' \
+--header 'sec-ch-ua: "Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"' \
+--header 'sec-ch-ua-mobile: ?0' \
+--header 'sec-ch-ua-platform: "Windows"' \
+--data '{
+    "integer": 123
+}'
+```
+Click send and await a result.
 
 ### Get the most recent conversions
+Open up Postman/Paw/Other and import the following as a new request:
+```bash
+curl --location 'http://localhost/v1/statistics/most-recent' \
+--header 'Accept: application/json, text/plain, */*' \
+--header 'Accept-Language: en-GB,en-US;q=0.9,en;q=0.8' \
+--header 'Connection: keep-alive' \
+--header 'Content-Type: application/json' \
+--header 'Origin: http://localhost:8000' \
+--header 'Referer: http://localhost:8000/' \
+--header 'Sec-Fetch-Dest: empty' \
+--header 'Sec-Fetch-Mode: cors' \
+--header 'Sec-Fetch-Site: same-site' \
+--header 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36' \
+--header 'sec-ch-ua: "Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"' \
+--header 'sec-ch-ua-mobile: ?0' \
+--header 'sec-ch-ua-platform: "Windows"'
+```
+
+Click send and await a result.
 
 ### Get the most popular conversions
-
+Open up Postman/Paw/Other and import the following as a new request:
+```bash
+curl --location 'http://localhost/v1/statistics/most-popular' \
+--header 'Accept: application/json, text/plain, */*' \
+--header 'Accept-Language: en-GB,en-US;q=0.9,en;q=0.8' \
+--header 'Connection: keep-alive' \
+--header 'Content-Type: application/json' \
+--header 'Origin: http://localhost:8000' \
+--header 'Referer: http://localhost:8000/' \
+--header 'Sec-Fetch-Dest: empty' \
+--header 'Sec-Fetch-Mode: cors' \
+--header 'Sec-Fetch-Site: same-site' \
+--header 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36' \
+--header 'sec-ch-ua: "Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"' \
+--header 'sec-ch-ua-mobile: ?0' \
+--header 'sec-ch-ua-platform: "Windows"'
+```
+Click send and await a result.
 ## Running tests
+- For Docker Desktop
+  - Open Docker Desktop, select the PHP container, navigate to exec and run `php artisan test`
+    - For a CLI approach
+        - Open a terminal
+        - Run `docker ps` and find the PHP container or alternatively use `docker ps -aqf "name=docker-php"` on a mac you can also do `pbcopy < docker ps -aqf "name=docker-php`
+        - Using the id of the container run the following command `docker exec {YOUR CONTAINER ID} php artisan test`
 
 ## Future considerations
 - Auth would be added via a JWT implementation or the use of Passport
 - Would have used Redis for caching but seemed out of scope so stuck with file cache
 - Could have optimised the database queries and used indexes, seemed out of scope for this test
+- Added more test coverage for API endpoints
+- Added BDD tests if there was a front end
+- Would have expanded the Writerside documentation, way out of scope for this test
